@@ -1,0 +1,42 @@
+class Solution {
+    public int romanToInt(String s) {
+        //ÓÃStringBuilderÀ´´æ´¢×Ö·û´®
+        StringBuilder string = new StringBuilder(s);
+        int length = s.length();
+        boolean flag = true;
+        int sum = 0,temp=0;
+        if(length == 1)
+            sum = convert(string.charAt(0));
+        for(int i=0;i<length-1;i++){
+            char ch = string.charAt(i);
+            char ch1 = string.charAt(i+1);
+            flag = true;
+            if(ch == 'I' && (ch1 == 'V'|| ch1 == 'X'))
+                flag = false;
+            if(ch == 'X' && (ch1 == 'L'|| ch1 == 'C'))
+                flag = false;
+            if(ch == 'C' && (ch1 == 'D'|| ch1 == 'M'))
+                flag = false;
+            if(flag == true)
+                sum += convert(ch);
+            else
+                sum -= convert(ch);
+            if(i == length-2)
+                sum += convert(ch1);
+        }
+        return sum;
+    }
+    private int convert(char ch){
+        int temp = 0;
+        switch(ch){
+                case 'I':temp=1;break;
+                case 'V':temp=5;break;
+                case 'X':temp=10;break;
+                case 'L':temp=50;break;
+                case 'C':temp=100;break;
+                case 'D':temp=500;break;
+                case 'M':temp=1000;break;
+            }
+        return temp;
+    }
+}
