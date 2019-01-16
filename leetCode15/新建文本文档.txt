@@ -1,0 +1,27 @@
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        //创建一个set对象用于去重重复的list集合
+        Set<List<Integer>> res = new HashSet<>();
+        //考虑数据合法性问题，如果数组的长度小于等于2的话那么直接返回空
+        if(nums.length<=2)
+            return new ArrayList<>(res);
+        //第一步对数组进行排序
+        Arrays.sort(nums);
+        //第二步将一个数固定，滑动另外两个数，求三个数的和
+        for (int i = 0; i <nums.length-2 ; i++) { //i作为第一个加数
+            int j = i + 1;
+            int k = nums.length-1;
+            while (j<k){
+                //计算三个数的和
+                int sum = nums[i] +nums[j] + nums[k];
+                //如果此时sum=0，将三个元素组成的list集合加入到set中，并将j向后移动一位，k向前移动一位
+                if(sum == 0) res.add(Arrays.asList(nums[i],nums[j++],nums[k--]));
+                //如果此时sum大于0的话，将k向前移动一位
+                else if(sum > 0)  k--;
+                    //如果此时sum小于0的话，将j向后移动一位
+                    else j++;
+            }
+        }
+        return new ArrayList<>(res);
+    }
+}
