@@ -1,0 +1,46 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        List<String> list = new LinkedList<>();
+        List<String> list1 = new LinkedList<>();
+        //1.判断字符串是否为空，如果为空直接返回空集合
+        if(digits==null||digits.trim().length()==0)
+            return list;
+        char ch = digits.charAt(0);
+        String item = get(ch);
+        //先把第一个字符所对应的字母存到list集合中，这样方便后来的迭代
+        for(int i=0;i<item.length();i++)
+            list.add(String.valueOf(item.charAt(i)));
+        int length = digits.length();
+        if(length>1){
+            for(int i=1;i<length;i++){
+                //首先需要获得当前字符代表的值
+                String temp = get(digits.charAt(i));
+                //然后让集合中每个位置都添加字符串中的一个字符
+                list1.clear();
+                for(String str:list){
+                    for(int j=0;j<temp.length();j++)
+                        list1.add(str.concat(String.valueOf(temp.charAt(j))));
+                }
+                //将集合list1中的内容复制到list集合中，集合不能使用“=”赋值
+                list.clear();
+                list.addAll(list1);
+            }
+        }
+        return list;
+    }
+    public String get(char ch){
+        String s = null;
+        switch(ch)
+        {
+            case '2':s = "abc";break;
+            case '3':s = "def";break;
+            case '4':s = "ghi";break;
+            case '5':s = "jkl";break;
+            case '6':s = "mno";break;
+            case '7':s = "pqrs";break;
+            case '8':s = "tuv";break;
+            case '9':s = "wxyz";break;
+        }
+        return s;
+    }
+}
