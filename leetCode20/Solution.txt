@@ -1,0 +1,41 @@
+class Solution {
+    public boolean isValid(String s) {
+      //使用栈来存储数据 
+      Stack<Character> stack = new Stack<>();
+      int length = s.length();
+      //如果字符串的长度为1时，说明不合法
+      if(length%2==1)
+          return false;
+      stack.push('#');
+      for(int i=0;i<length;i++){
+          char ch = s.charAt(i);
+          if(ch=='('||ch=='{'||ch=='[')
+              stack.push(ch);
+          else if(ch==')'){
+              char temp = stack.peek();
+              if(temp=='(')
+                  stack.pop();
+              else
+                  return false;
+          }
+           else if(ch=='}'){
+              char temp = stack.peek();
+              if(temp=='{')
+                  stack.pop();
+              else
+                  return false;
+          }
+           else if(ch==']'){
+              char temp = stack.peek();
+              if(temp=='[')
+                  stack.pop();
+              else
+                  return false;
+          }
+      }
+        if(stack.pop()=='#')
+            return true;
+        else
+            return false;
+    }
+}
