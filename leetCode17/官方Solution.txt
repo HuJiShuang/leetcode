@@ -1,0 +1,18 @@
+public List<String> letterCombinations(String digits) {
+		LinkedList<String> ans = new LinkedList<String>();
+		if(digits.isEmpty()) return ans;
+		//新建一个字符串数组，数组对应的位置为数字转换后得到的字母
+		String[] mapping = new String[] {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+		//一开始插入一个空字符串，长度为0
+		ans.add("");
+		//当peek()得到的长度等于字符串的长度时，说明已经满足条件了
+		while(ans.peek().length()!=digits.length()){
+			String remove = ans.remove();
+			String map = mapping[digits.charAt(remove.length())-'0'];
+			for(char c: map.toCharArray()){
+				//把新生成的字符串插到列表的末尾
+				ans.addLast(remove+c);
+			}
+		}
+		return ans;
+	}
