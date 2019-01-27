@@ -1,0 +1,17 @@
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+       //定义一个头节点，就能够解决需要单独判读n=1的情况
+        ListNode start = new ListNode(0);
+        ListNode fast=start,slow=start;
+        //将头节点链接到链表上
+        fast.next = head;
+        for(int i=1;i<=n+1;i++)
+            fast = fast.next;
+        while(fast!=null){
+            fast = fast.next;
+            slow = slow.next;
+        }
+        slow.next = slow.next.next;
+        return start.next;
+    }
+}
