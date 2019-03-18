@@ -1,0 +1,21 @@
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int start = 0;   //第一个索引从头开始走，直达走到val值停下
+        int end = nums.length - 1;   //第二个索引从尾部开始走，直达走到非val值停下来
+        //此处使用等于是为了防止数组长度为1的情况
+        while(start <= end){
+            while(start < nums.length && nums[start] != val){
+                start++;
+            }
+            while(end >= 0  && nums[end] == val){
+                end--;
+            }
+            if(start < end){
+                int temp = nums[start];
+                nums[start] = nums[end];
+                nums[end] = temp;
+            }
+        }
+        return start;
+    }
+}
