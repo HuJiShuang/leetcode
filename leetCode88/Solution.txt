@@ -1,0 +1,28 @@
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        //为了节约空间应该从大到小排序
+        int mIndex = m + n - 1;     //这个索引指向数字该出现的位置
+        int fIndex = m - 1;         //这个索引指向第一个数组该比较的位置
+        int sIndex = n - 1;         //这个索引指向第二个数组该比较的位置
+        while(fIndex >=0 && sIndex >= 0){
+            //如果第一个数组大于第二个数组的数字，将第一个数组中的数字放到该出现的位置，并让两个索引分别减1
+            if(nums1[fIndex] > nums2[sIndex]){
+                nums1[mIndex--] = nums1[fIndex--];
+            }
+            //如果第一个数组小于第二个数组的数字，将第二个数组中的数字放到该出现的位置，并让两个索引分别减1
+            else if(nums1[fIndex] < nums2[sIndex]){
+                nums1[mIndex--] = nums2[sIndex--];
+            }
+            //如果第一个数组等于第二个数组的数字，将第一、二个数组中的数字放到该出现的位置，并让三个索引分别减
+            else{
+                nums1[mIndex--] = nums1[fIndex--];
+                nums1[mIndex--] = nums2[sIndex--];
+            }
+        }
+        if(sIndex >= 0){
+            while(mIndex >= 0){
+                nums1[mIndex--] = nums2[sIndex--];
+            }
+        }
+    }
+}
