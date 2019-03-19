@@ -1,0 +1,20 @@
+class Solution {
+    public void sortColors(int[] nums) {
+        int zero = -1;            //从[0,zero]间的数字都是0,初始值设为-1代表此时数组内无数字
+        int two = nums.length;    //从[two,n-1]之间的数字都是2,初始值设为2代表此时数组内无数字
+        for(int index=0;index<two;){
+            if(nums[index] == 1)
+                index++;
+            else if(nums[index] == 2){
+                int temp = nums[--two];
+                nums[two] = nums[index];
+                nums[index] = temp;
+            }
+            else{
+                int temp = nums[++zero];
+                nums[zero] = nums[index];
+                nums[index++] = temp; 
+            }
+        }
+    }
+}
